@@ -37,14 +37,25 @@ body {
 }
 
 /* PAGE CARD */
+/* GLASSMORPHIC INTERACTION CARD (iOS STYLE) */
 .page {
+    position: relative;
     display: none;
-    padding: 40px 20px;
+    padding: 40px 22px;
     max-width: 360px;
-    margin: 60px auto;
-    background: rgba(255, 247, 249, 0.94);
-    border-radius: 26px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.18);
+    margin: 70px auto;
+
+    background: rgba(255, 255, 255, 0.22); /* translucent glass */
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+
+    border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
     animation: fadeUp 0.6s ease;
 }
 
@@ -117,8 +128,9 @@ button:hover {
 
 <!-- PAGE 4 -->
 <div class="page">
-    <h2>2025 Summary 💕</h2>
-    <p>Sab yaadein… ek frame mein 🥹</p>
+    <h2>2025 Summary ke naam pr sirf ye background photos hi daal paya hu so plz adjust guys 💕</h2>
+    <p>Sab yaadein…tere sath
+        this fulll year was best cause of u all the good parts that felt like a dreamy movie were cause of you 🥹</p>
     <button onclick="nextPage()">Next</button>
 </div>
 
@@ -203,9 +215,20 @@ function nextPage() {
 
 function runAway() {
     const btn = document.getElementById("noBtn");
+    const page = btn.closest(".page");
+
+    const pageRect = page.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+
+    const maxX = pageRect.width - btnRect.width - 10;
+    const maxY = pageRect.height - btnRect.height - 10;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
     btn.style.position = "absolute";
-    btn.style.left = Math.random() * (window.innerWidth - 120) + "px";
-    btn.style.top = Math.random() * (window.innerHeight - 60) + "px";
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
 }
 </script>
 
